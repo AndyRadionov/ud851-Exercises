@@ -26,6 +26,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 
+import static com.example.android.todolist.data.TaskContract.TaskEntry.COLUMN_PRIORITY;
 import static com.example.android.todolist.data.TaskContract.TaskEntry.TABLE_NAME;
 
 // Verify that TaskContentProvider extends from ContentProvider and implements required methods
@@ -120,15 +121,31 @@ public class TaskContentProvider extends ContentProvider {
     public Cursor query(@NonNull Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
 
-        // TODO (1) Get access to underlying database (read-only for query)
+        // COMPLETED (1) Get access to underlying database (read-only for query)
+        SQLiteDatabase db = new TaskDbHelper(getContext()).getReadableDatabase();
 
-        // TODO (2) Write URI match code and set a variable to return a Cursor
+        // COMPLETED (2) Write URI match code and set a variable to return a Cursor
+        int match = sUriMatcher.match(uri);
+        Cursor resultCursor;
+        switch (match) {
+            // COMPLETED (3) Query for the tasks directory and write a default case
+            case TASKS:
+                resultCursor = db.query(
+                        TABLE_NAME,
+                        projection,
+                        selection,
+                        selectionArgs,
+                        null,
+                        null,
+                        sortOrder);
+                break;
+                default:
+                    throw new IllegalArgumentException("Wrong Uri: " + uri);
+        }
 
-        // TODO (3) Query for the tasks directory and write a default case
-
-        // TODO (4) Set a notification URI on the Cursor and return that Cursor
-
-        throw new UnsupportedOperationException("Not yet implemented");
+        // COMPLETED (4) Set a notification URI on the Cursor and return that Cursor
+        resultCursor.setNotificationUri(getContext().getContentResolver(), uri);
+        return resultCursor;
     }
 
 
