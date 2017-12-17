@@ -101,7 +101,7 @@ public class NotificationUtils {
                 ACTION_IGNORE_PENDING_INTENT_ID,
                 ignoreReminderIntent,
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        Action ignoreReminderAction = new Action(R.drawable.ic_cancel_black_24px,
+        Action ignoreReminderAction = new Action(R.drawable.ic_drink_notification,
                 "No, thanks.",
                 ignoreReminderPendingIntent);
         return ignoreReminderAction;
@@ -115,7 +115,7 @@ public class NotificationUtils {
                 ACTION_DRINK_PENDING_INTENT_ID,
                 incrementWaterCountIntent,
                 PendingIntent.FLAG_CANCEL_CURRENT);
-        Action drinkWaterAction = new Action(R.drawable.ic_local_drink_black_24px,
+        Action drinkWaterAction = new Action(R.drawable.ic_drink_notification,
                 "I did it!",
                 incrementWaterPendingIntent);
         return drinkWaterAction;
