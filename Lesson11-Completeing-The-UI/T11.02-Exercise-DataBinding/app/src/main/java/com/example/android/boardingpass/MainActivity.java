@@ -18,7 +18,9 @@ package com.example.android.boardingpass;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.graphics.drawable.VectorDrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.example.android.boardingpass.databinding.ActivityMainBinding;
 import com.example.android.boardingpass.utilities.FakeDataUtils;
@@ -29,7 +31,10 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
 
+    }
     //COMPLETED (3) Create a data binding instance called mBinding of type ActivityMainBinding
     private ActivityMainBinding mBinding;
 
@@ -37,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        VectorDrawableCompat.create(getResources(), R.drawable.art_plane, null);
 
         // COMPLETED (4) Set the Content View using DataBindingUtil to the activity_main layout
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
